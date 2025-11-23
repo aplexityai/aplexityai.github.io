@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AI Heart: Clinical Scan</title>
+    <style>
+        /* --- TREVOGA STYLE (DARK MEDICAL) --- */
+        :root {
+            --primary-red: #eb2f06; /* Более агрессивный красный */
+            --dark-bg: #000000;
+            --card-bg: #1e1e1e;
+            --text-main: #f1f2f6;
+            --text-muted: #a4b0be;
+            --border: #2f3542;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .quiz-container {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 480px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* HEADER: Progress & Section Info */
+        .header-bar {
+            padding: 15px 20px 10px;
+            background: rgba(30, 30, 30, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #333;
+        }
+
+        .progress-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+        }
+
+        .section-badge {
+            background: #2f3542;
+            color: #fff;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+        }
+
+        .progress-track {
+            height: 4px;
+            background: #2f3542;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-red);
+            width: 0%;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 8px rgba(235, 47, 6, 0.6);
+        }
+
+        /* VISUAL ZONE */
+        .visual-block {
+            height: 180px;
+            background: #000;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .visual-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+            transition: opacity 0.4s;
+        }
+
+        /* Анимация "Сканирования" */
+        .scan-line {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary-red);
+            box-shadow: 0 0 15px var(--primary-red);
+            animation: scanMove 2.5s infinite linear;
+            opacity: 0.7;
+        }
+        @keyframes scanMove { 0% {top: 0;} 100% {top: 100%;} }
+
+        /* CONTENT BODY */
+        .content-body {
+            padding: 24px 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+            line-height: 1.35;
+        }
+
+        p.description {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.5;
+            margin: 0 0 25px 0;
+        }
+
+        /* Option Buttons */
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-option {
+            background: #252527;
+            border: 1px solid var(--border);
+            color: #fff;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: left;
+            font-size: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s;
+        }
+
+        .btn-option:active {
+            transform: scale(0.98);
+            background: #333;
+        }
+
+        .btn-option.selected {
+            border-color: var(--primary-red);
+            background: rgba(235, 47, 6, 0.1);
+            color: var(--primary-red);
+            font-weight: 600;
+        }
+
+        /* Primary Action Button (Next/Start) */
+        .btn-action {
+            width: 100%;
+            background: var(--primary-red);
+            color: #fff;
+            border: none;
+            padding: 18px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            margin-top: auto; /* Прижимает кнопку к низу, если контента мало */
+            box-shadow: 0 5px 20px rgba(235, 47, 6, 0.3);
+        }
+
+        /* WARNING SCREEN STYLE */
+        .warning-mode .visual-block {
+            border-bottom: 3px solid var(--primary-red);
+        }
+        .warning-mode h2 { color: var(--primary-red); }
+
+        /* ANALYSIS LOADER */
+        .analysis-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+            padding: 40px 0;
+        }
+        .heart-beat {
+            font-size: 60px;
+            margin-bottom: 20px;
+            animation: heartBeat 1.2s infinite;
+        }
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.3); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.15); }
+            60% { transform: scale(1); }
+        }
+        .log-text {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: var(--primary-red);
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="quiz-container" id="app">
+    <div class="header-bar" id="header">
+        <div class="progress-meta">
+            <span class="section-badge" id="section-badge">START</span>
+            <span id="progress-percent">0%</span>
+        </div>
+        <div class="progress-track">
+            <div class="progress-fill" id="progress-bar"></div>
+        </div>
+    </div>
+
+    <div class="visual-block" id="visual-container">
+        <div class="scan-line"></div>
+        <img src="" class="visual-img" id="main-image" alt="Visual">
+    </div>
+
+    <div class="content-body" id="content">
+        </div>
+</div>
+
+<script>
+    // --- DATABASE: 35+ STEPS ---
+    const steps = [
+        // --- 0. INTRO ---
+        {
+            type: 'intro',
+            section: 'Start',
+            img: 'https://placehold.co/600x300/111/444?text=Cardio+Scan',
+            title: "ДИАГНОСТИКА AI HEART",
+            desc: "Внимание: Это глубокий клинический скрининг. Алгоритм задаст 35 вопросов, чтобы оценить состояние вашей сердечно-сосудистой системы. Ответы анонимны.",
+            btn: "НАЧАТЬ ПРОВЕРКУ"
+        },
+
+        // --- I. DEMOGRAPHICS & ANTHROPOMETRY ---
+        {
+            type: 'quiz',
+            section: 'Демография',
+            img: 'https://placehold.co/600x300/111/444?text=Gender',
+            title: "Укажите ваш пол",
+            desc: "Гормональный фон — ключевой фактор риска инфаркта миокарда.",
+            opts: ["Мужчина", "Женщина"]
+        },
+        {
+            type: 'quiz',
+            section: 'Демография',
+            img: 'https://placehold.co/600x300/111/444?text=Age',
+            title: "Ваш возраст",
+            desc: "После определенного рубежа сосуды теряют эластичность естественным образом.",
+            opts: ["до 25 лет", "26–35 лет", "36–45 лет", "46–55 лет", "56–65 лет", "Старше 65"]
+        },
+        {
+            type: 'quiz',
+            section: 'Антропометрия',
+            img: 'https://placehold.co/600x300/111/444?text=Weight',
+            title: "Индекс массы тела",
+            desc: "Оцените ваше соотношение роста и веса. Лишний вес увеличивает нагрузку на сердце в 3 раза.",
+            opts: ["Дефицит веса", "Норма", "Небольшой лишний вес", "Заметный лишний вес (Ожирение I)", "Ожирение II-III степени"]
+        },
+        
+        // --- II. HEREDITY (GENETICS) ---
+        {
+            type: 'quiz',
+            section: 'Генетика',
+            img: 'https://placehold.co/600x300/111/444?text=Family',
+            title: "Родственники по мужской линии",
+            desc: "Были ли у отца или дедушки инфаркты/инсульты до 55 лет?",
+            opts: ["Да, были", "Не уверен", "Нет, они здоровы/долгожители"]
+        },
+        {
+            type: 'quiz',
+            section: 'Генетика',
+            img: 'https://placehold.co/600x300/111/444?text=DNA',
+            title: "Родственники по женской линии",
+            desc: "Страдала ли мать или бабушка от гипертонии или диабета?",
+            opts: ["Да, есть диагнозы", "Только в глубокой старости", "Нет"]
+        },
+
+        // --- WARNING 1 ---
+        {
+            type: 'warning',
+            section: 'Анализ',
+            img: 'https://placehold.co/600x300/330000/ff0000?text=Risk+Check',
+            title: "Предварительная оценка",
+            desc: "Ваши базовые данные загружены. Мы переходим к блоку кардио-симптомов. Отвечайте предельно честно, даже если симптомы кажутся незначительными.",
+            btn: "ПРОДОЛЖИТЬ"
+        },
+
+        // --- III. SPECIFIC CARDIOLOGY (PAIN & RHYTHM) ---
+        {
+            type: 'quiz',
+            section: 'Кардиология',
+            img: 'https://placehold.co/600x300/111/444?text=Pain',
+            title: "Болевой синдром",
+            desc: "Испытываете ли вы сдавленность или тяжесть в центре груди?",
+            opts: ["Да, регулярно", "Иногда, при стрессе/нагрузке", "Было пару раз", "Никогда"]
+        },
+        {
+            type: 'quiz',
+            section: 'Кардиология',
+            img: 'https://placehold.co/600x300/111/444?text=Irradiation',
+            title: "Иррадиация боли",
+            desc: "Отдает ли неприятное ощущение в левую руку, плечо или челюсть?",
+            opts: ["Да, часто", "Иногда замечаю", "Нет"]
+        },
+        {
+            type: 'quiz',
+            section: 'Кардиология',
+            img: 'https://placehold.co/600x300/111/444?text=Palpitations',
+            title: "Сердцебиение",
+            desc: "Бывает ли ощущение, что сердце «выпрыгивает» из груди или пропускает удар?",
+            opts: ["Да, часто в покое", "Только при нагрузке", "Нет, ритм ровный"]
+        },
+        {
+            type: 'quiz',
+            section: 'Кардиология',
+            img: 'https://placehold.co/600x300/111/444?text=Breath',
+            title: "Одышка",
+            desc: "Вам трудно дышать, когда вы лежите на спине ровно?",
+            opts: ["Да, мне нужна высокая подушка", "Иногда бывает", "Нет, сплю нормально"]
+        },
+
+        // --- IV. NEUROLOGY & PERIPHERAL ---
+        {
+            type: 'quiz',
+            section: 'Неврология',
+            img: 'https://placehold.co/600x300/111/444?text=Dizziness',
+            title: "Головокружение",
+            desc: "Темнеет ли у вас в глазах при резком вставании?",
+            opts: ["Регулярно (Ортостатический коллапс)", "Редко", "Никогда"]
+        },
+        {
+            type: 'quiz',
+            section: 'Неврология',
+            img: 'https://placehold.co/600x300/111/444?text=Hands',
+            title: "Конечности",
+            desc: "Мерзнут ли у вас руки или ноги даже в теплом помещении?",
+            opts: ["Да, постоянно холодные", "Иногда", "Нет"]
+        },
+        {
+            type: 'quiz',
+            section: 'Неврология',
+            img: 'https://placehold.co/600x300/111/444?text=Edema',
+            title: "Отечность ног",
+            desc: "Остаются ли следы от носков на лодыжках вечером?",
+            opts: ["Да, сильные отеки", "Немного к вечеру", "Нет"]
+        },
+
+        // --- V. MEDICAL HISTORY (NUMBERS) ---
+        {
+            type: 'quiz',
+            section: 'Анамнез',
+            img: 'https://placehold.co/600x300/111/444?text=Blood+Pressure',
+            title: "Ваше давление",
+            desc: "Знаете ли вы свои цифры АД?",
+            opts: ["Выше 140/90 (Гипертония)", "В районе 130/80", "120/80 (Норма)", "Ниже 100/60 (Гипотония)", "Не измеряю"]
+        },
+        {
+            type: 'quiz',
+            section: 'Анамнез',
+            img: 'https://placehold.co/600x300/111/444?text=Cholesterol',
+            title: "Холестерин",
+            desc: "Сдавали ли вы липидограмму за последний год?",
+            opts: ["Да, уровень повышен", "Да, всё в норме", "Нет, не знаю уровень"]
+        },
+        {
+            type: 'quiz',
+            section: 'Анамнез',
+            img: 'https://placehold.co/600x300/111/444?text=Sugar',
+            title: "Уровень сахара",
+            desc: "Есть ли у вас диабет или преддиабет?",
+            opts: ["Да, Диабет 1/2 типа", "Преддиабет / Инсулинорезистентность", "Сахар в норме", "Не знаю"]
+        },
+
+        // --- WARNING 2 ---
+        {
+            type: 'warning',
+            section: 'Внимание',
+            img: 'https://placehold.co/600x300/330000/ff0000?text=Critical+Check',
+            title: "Промежуточный итог",
+            desc: "Мы собрали физиологические данные. Следующий блок критически важен: он касается «Тихих убийц» — ваших привычек. Пожалуйста, не приуменьшайте.",
+            btn: "ПЕРЕЙТИ К ОБРАЗУ ЖИЗНИ"
+        },
+
+        // --- VI. LIFESTYLE (TOXIC LOAD) ---
+        {
+            type: 'quiz',
+            section: 'Токсины',
+            img: 'https://placehold.co/600x300/111/444?text=Smoke',
+            title: "Курение",
+            desc: "Сигареты, вейпы, IQOS, кальяны — считается всё.",
+            opts: ["Курю много лет", "Курю иногда / Социально", "Бросил(а) недавно", "Никогда не курил(а)"]
+        },
+        {
+            type: 'quiz',
+            section: 'Токсины',
+            img: 'https://placehold.co/600x300/111/444?text=Alcohol',
+            title: "Алкоголь",
+            desc: "Как часто вы употребляете спиртное?",
+            opts: ["Несколько раз в неделю", "1 раз в неделю", "По праздникам / Редко", "Полный отказ"]
+        },
+        {
+            type: 'quiz',
+            section: 'Питание',
+            img: 'https://placehold.co/600x300/111/444?text=Salt',
+            title: "Потребление соли",
+            desc: "Досаливаете ли вы еду? Любите соленое, копченое?",
+            opts: ["Да, люблю соленое", "Умеренно", "Ограничиваю соль"]
+        },
+        {
+            type: 'quiz',
+            section: 'Питание',
+            img: 'https://placehold.co/600x300/111/444?text=Caffeine',
+            title: "Кофеин",
+            desc: "Сколько чашек кофе (или энергетиков) вы пьете в день?",
+            opts: ["3 и более", "1-2 чашки", "Не пью кофе"]
+        },
+
+        // --- VII. ACTIVITY & SLEEP ---
+        {
+            type: 'quiz',
+            section: 'Активность',
+            img: 'https://placehold.co/600x300/111/444?text=Sedentary',
+            title: "Образ жизни",
+            desc: "Сколько часов в день вы проводите сидя (работа + транспорт + диван)?",
+            opts: ["Более 8 часов (Сидячий)", "6-8 часов", "Менее 5 часов (Активный)"]
+        },
+        {
+            type: 'quiz',
+            section: 'Активность',
+            img: 'https://placehold.co/600x300/111/444?text=Sport',
+            title: "Кардионагрузки",
+            desc: "Делаете ли вы упражнения, повышающие пульс (бег, плавание), хотя бы 2 раза в неделю?",
+            opts: ["Нет", "Редко / Нерегулярно", "Да, регулярно"]
+        },
+        {
+            type: 'quiz',
+            section: 'Сон',
+            img: 'https://placehold.co/600x300/111/444?text=Snoring',
+            title: "Храп",
+            desc: "Говорили ли вам близкие, что вы храпите или перестаете дышать во сне (апноэ)?",
+            opts: ["Да, сильный храп", "Иногда", "Нет / Живу один"]
+        },
+        {
+            type: 'quiz',
+            section: 'Сон',
+            img: 'https://placehold.co/600x300/111/444?text=Insomnia',
+            title: "Качество сна",
+            desc: "Долго ли вы засыпаете или просыпаетесь ли среди ночи?",
+            opts: ["Да, мучает бессонница", "Сплю беспокойно", "Сплю как убитый"]
+        },
+
+        // --- VIII. PSYCHO-EMOTIONAL ---
+        {
+            type: 'quiz',
+            section: 'Психика',
+            img: 'https://placehold.co/600x300/111/444?text=Stress',
+            title: "Уровень стресса (0-10)",
+            desc: "Как вы оцениваете свою нервную нагрузку за последний месяц?",
+            opts: ["Критический (8-10)", "Высокий (6-7)", "Средний (4-5)", "Низкий (1-3)"]
+        },
+        {
+            type: 'quiz',
+            section: 'Психика',
+            img: 'https://placehold.co/600x300/111/444?text=Panic',
+            title: "Тревожность",
+            desc: "Бывают ли у вас приступы беспричинной тревоги или панические атаки?",
+            opts: ["Да, случаются", "Редко", "Нет"]
+        },
+        {
+            type: 'quiz',
+            section: 'Психика',
+            img: 'https://placehold.co/600x300/111/444?text=Irritability',
+            title: "Раздражительность",
+            desc: "Чувствуете ли вы вспышки гнева по мелочам?",
+            opts: ["Да, часто срываюсь", "Иногда", "Я спокоен"]
+        },
+
+        // --- IX. FINAL COMMITMENT ---
+        {
+            type: 'quiz',
+            section: 'Финал',
+            img: 'https://placehold.co/600x300/111/444?text=Decision',
+            title: "Осознанность",
+            desc: "Последний вопрос. Если мы обнаружим высокий риск инфаркта в ближайшие 12 месяцев, вы готовы инвестировать в профилактику прямо сейчас?",
+            opts: ["Да, жизнь дороже всего", "Только если это недорого", "Нет, я фаталист"]
+        }
+    ];
+
+    // --- LOGIC ---
+    let currentStep = 0;
+    const app = document.getElementById('app');
+    const content = document.getElementById('content');
+    const header = document.getElementById('header');
+    const progressBar = document.getElementById('progress-bar');
+    const progressPerc = document.getElementById('progress-percent');
+    const sectionBadge = document.getElementById('section-badge');
+    const mainImg = document.getElementById('main-image');
+    const visualContainer = document.getElementById('visual-container');
+
+    function init() {
+        render();
+    }
+
+    function render() {
+        if (currentStep >= steps.length) {
+            startAnalysis();
+            return;
+        }
+
+        const step = steps[currentStep];
+
+        // 1. Update Visuals
+        const percent = Math.round((currentStep / steps.length) * 100);
+        progressBar.style.width = percent + "%";
+        progressPerc.innerText = percent + "%";
+        if (step.section) sectionBadge.innerText = step.section;
+
+        mainImg.style.opacity = 0.3;
+        setTimeout(() => {
+            mainImg.src = step.img;
+            mainImg.style.opacity = 0.6;
+        }, 200);
+
+        // 2. Check Warning Mode
+        if (step.type === 'warning') {
+            app.classList.add('warning-mode');
+        } else {
+            app.classList.remove('warning-mode');
+        }
+
+        // 3. Render Content
+        let html = '';
+
+        if (step.type === 'intro' || step.type === 'warning') {
+            html = `
+                <div style="text-align:center; display:flex; flex-direction:column; justify-content:center; flex-grow:1;">
+                    <h2 style="font-size:24px; margin-bottom:15px; ${step.type === 'warning' ? 'color:#eb2f06;' : ''}">${step.title}</h2>
+                    <p class="description">${step.desc}</p>
+                </div>
+                <button class="btn-action" onclick="next()">${step.btn}</button>
+            `;
+        } else {
+            html = `
+                <div>
+                    <h2>${step.title}</h2>
+                    <p class="description">${step.desc}</p>
+                    <div class="options-grid">
+                        ${step.opts.map(opt => `
+                            <button class="btn-option" onclick="select(this)">
+                                ${opt}
+                                <span style="opacity:0.5">›</span>
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        content.innerHTML = html;
+        window.scrollTo(0,0);
+    }
+
+    window.select = function(el) {
+        document.querySelectorAll('.btn-option').forEach(b => b.classList.remove('selected'));
+        el.classList.add('selected');
+        setTimeout(next, 200); // Быстрый переход
+    }
+
+    window.next = function() {
+        currentStep++;
+        render();
+    }
+
+    function startAnalysis() {
+        header.style.display = 'none';
+        visualContainer.style.display = 'none';
+        
+        const logs = [
+            "Подключение к Neural Heart Core...",
+            "Загрузка анкетных данных...",
+            "Анализ генетической предрасположенности...",
+            "Оценка факторов риска образа жизни...",
+            "Корреляция симптомов с базой МКБ-11...",
+            "Расчет индекса сосудистого старения...",
+            "Выявление скрытых угроз...",
+            "Формирование персонального отчета..."
+        ];
+
+        let i = 0;
+        function showLog() {
+            if (i >= logs.length) {
+                showFinal();
+                return;
+            }
+            content.innerHTML = `
+                <div class="analysis-screen">
+                    <div class="heart-beat">❤️</div>
+                    <h2 style="font-size:18px;">Анализ данных...</h2>
+                    <div class="log-text">${logs[i]}</div>
+                    <div style="margin-top:20px; width:200px; height:4px; background:#333; border-radius:2px;">
+                        <div style="height:100%; background:#eb2f06; width:${(i+1)/logs.length*100}%; transition:width 0.5s;"></div>
+                    </div>
+                </div>
+            `;
+            i++;
+            setTimeout(showLog, 1500); // 1.5 сек на шаг
+        }
+        showLog();
+    }
+
+    function showFinal() {
+        content.innerHTML = `
+            <div style="text-align:center; padding-top:20px;">
+                <div style="font-size:60px; margin-bottom:10px;">⚠️</div>
+                <h2 style="color:var(--primary-red); margin-bottom:10px;">Анализ завершен</h2>
+                <p class="description" style="color:#fff;">
+                    Обнаружено <span style="color:var(--primary-red); font-weight:bold;">5 критических факторов</span>, требующих немедленного внимания. 
+                </p>
+
+                <div style="background:#252527; border-radius:12px; padding:20px; text-align:left; margin-bottom:25px; font-size:14px; border-left: 4px solid var(--primary-red);">
+                    <div style="margin-bottom:10px; font-weight:bold; color:#fff;">ВАШ РЕЗУЛЬТАТ СОДЕРЖИТ:</div>
+                    <div style="margin-bottom:5px;">✅ Карта рисков инфаркта</div>
+                    <div style="margin-bottom:5px;">✅ Прогноз здоровья на 3 года</div>
+                    <div style="margin-bottom:5px;">✅ План снижения давления и стресса</div>
+                    <div>✅ Рекомендации по анализам</div>
+                </div>
+
+                <p style="font-size:12px; color:#666; margin-bottom:20px;">
+                    Вы потратили 5 минут на этот тест. Потратьте еще 2 минуты, чтобы изучить отчет, который может спасти вам жизнь.
+                </p>
+
+                <button class="btn-action" onclick="finish()">ПОЛУЧИТЬ ПЛАН SPASENIE</button>
+            </div>
+        `;
+    }
+
+    window.finish = function() {
+        // РЕДИРЕКТ НА ОФФЕР
+        alert("Здесь должен быть редирект на платёжную страницу");
+    }
+
+    init();
+</script>
+
+</body>
+</html>
