@@ -128,7 +128,6 @@
         /* --- HERO SECTION --- */
         .hero {
             position: relative;
-            /* 100svh решает проблему с мобильными браузерами */
             min-height: 100vh;
             min-height: 100svh; 
             display: flex;
@@ -212,28 +211,31 @@
             background: linear-gradient(to top, #000 0%, transparent 100%);
         }
 
-        footer .company { color: #fff; font-weight: 600; margin-bottom: 12px; font-size: 16px; }
-        footer a { color: var(--text-main); text-decoration: none; opacity: 0.8; }
-        footer address { font-style: normal; margin-top: 10px; line-height: 1.6; color: #666; }
+        footer .company { color: #fff; font-weight: 600; margin-bottom: 15px; font-size: 16px; }
+        
+        /* Стили для строк контактов */
+        footer .contact-line { margin-bottom: 8px; }
+        
+        footer a { color: var(--text-main); text-decoration: none; opacity: 0.8; transition: 0.3s; }
+        footer a:hover { opacity: 1; text-decoration: underline; }
+        footer address { font-style: normal; margin-top: 20px; line-height: 1.6; color: #666; }
 
         /* --- MOBILE ADAPTIVE (FIXES) --- */
         @media (max-width: 768px) {
-            /* Скрываем навигацию на мобильном, чтобы не мешала */
             nav { display: none; }
 
             .hero {
                 padding: 40px 20px;
-                /* На мобильном чуть смещаем вверх */
                 justify-content: center; 
             }
 
             .hero-icon {
-                width: 60px; /* Уменьшаем лого */
+                width: 60px;
                 margin-bottom: 24px;
             }
 
             h1 { 
-                font-size: 42px; /* Оптимальный размер для iPhone */
+                font-size: 42px;
                 letter-spacing: -1px; 
                 margin-bottom: 16px;
             }
@@ -245,21 +247,16 @@
                 max-width: 100%;
             }
 
-            .buttons {
-                width: 100%;
-            }
+            .buttons { width: 100%; }
 
             .btn { 
-                width: 100%; /* Кнопка на всю ширину */
+                width: 100%;
                 max-width: 340px;
                 padding: 16px 20px;
                 font-size: 16px;
             }
             
-            /* Уменьшаем блобы, чтобы телефон не грелся и не перекрывало текст */
             .blob { opacity: 0.5; filter: blur(60px); }
-            
-            /* Футер компактнее */
             footer { padding: 40px 20px; }
         }
     </style>
@@ -302,13 +299,20 @@
 
     <footer id="contacts">
         <div class="company">Aplexity Limited</div>
-        <div>
+        
+        <div class="contact-line">
             Email: <a href="mailto:support@aplexityai.com">support@aplexityai.com</a>
         </div>
+        
+        <div class="contact-line">
+            Phone: <a href="tel:+85230081342">+852 3008 1342</a>
+        </div>
+
         <address>
             Room 11114, 11F, 33 Lockhart Road,<br> 
             Wanchai, Hong Kong, 999077
         </address>
+        
         <div style="margin-top: 40px; opacity: 0.3; font-size: 12px;">
             © 2025 Aplexity Limited. All rights reserved.
         </div>
