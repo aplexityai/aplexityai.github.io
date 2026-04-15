@@ -1,1 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DogTalk - Terms of Use</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #F97316;
+            --primary-dark: #EA580C;
+            --accent: #FB923C;
+            --bg-dark: #0F172A;
+            --bg-card: #1E293B;
+            --text-primary: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --border: rgba(255,255,255,0.06);
+            --glow: rgba(249,115,22,0.15);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7; color: var(--text-primary);
+            background-color: var(--bg-dark); min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+        body::before {
+            content: ''; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(ellipse at 20% 20%, rgba(249,115,22,0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 80%, rgba(59,130,246,0.05) 0%, transparent 50%);
+            z-index: -1; animation: ambientShift 20s ease-in-out infinite alternate;
+        }
+        @keyframes ambientShift { 0% { transform: translate(0,0); } 100% { transform: translate(-5%,-3%); } }
+        .hero { padding: 80px 24px 60px; text-align: center; position: relative; }
+        .hero::after {
+            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 120px; height: 2px; background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px;
+            background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.2);
+            border-radius: 100px; font-size: 0.8rem; font-weight: 500; color: var(--accent);
+            margin-bottom: 24px; letter-spacing: 0.5px; text-transform: uppercase;
+        }
+        .hero-badge svg { width: 14px; height: 14px; fill: currentColor; }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero .subtitle { font-size: 1rem; color: var(--text-secondary); font-weight: 400; }
+        .hero .update-date { font-size: 0.85rem; color: var(--text-muted); margin-top: 8px; }
+        .toc { max-width: 780px; margin: 0 auto 40px; padding: 0 24px; }
+        .toc-inner { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; }
+        .toc h2 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 16px; font-weight: 600; }
+        .toc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px; }
+        .toc a { display: block; padding: 8px 12px; color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; border-radius: 8px; transition: all 0.2s ease; }
+        .toc a:hover { color: var(--accent); background: rgba(249,115,22,0.05); }
+        .container { max-width: 780px; margin: 0 auto; padding: 0 24px 80px; }
+        .section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 36px 40px; margin-bottom: 20px; transition: border-color 0.3s ease; }
+        .section:hover { border-color: rgba(255,255,255,0.1); }
+        .section h2 { font-size: 1.35rem; font-weight: 600; color: var(--text-primary); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+        .section h2 .num {
+            display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; min-width: 32px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 10px;
+            font-size: 0.8rem; font-weight: 700; color: #fff;
+        }
+        .section h3 { font-size: 1.05rem; font-weight: 600; color: var(--text-primary); margin-top: 24px; margin-bottom: 12px; }
+        .section p { color: var(--text-secondary); margin-bottom: 16px; font-size: 0.95rem; line-height: 1.75; }
+        .section p.caps { text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.02em; line-height: 1.7; }
+        .section ul { list-style: none; padding: 0; margin-bottom: 16px; }
+        .section ul li { position: relative; padding: 10px 0 10px 28px; color: var(--text-secondary); font-size: 0.95rem; border-bottom: 1px solid var(--border); }
+        .section ul li:last-child { border-bottom: none; }
+        .section ul li::before { content: ''; position: absolute; left: 0; top: 18px; width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent)); box-shadow: 0 0 8px var(--glow); }
+        .section ul li strong { color: var(--text-primary); font-weight: 600; }
+        .section a { color: var(--accent); text-decoration: none; font-weight: 500; transition: color 0.2s ease; }
+        .section a:hover { color: #FDBA74; text-decoration: underline; }
+        .footer { text-align: center; padding: 40px 24px 60px; color: var(--text-muted); font-size: 0.85rem; }
+        .footer .brand { font-weight: 600; color: var(--text-secondary); }
+        .footer a { color: var(--accent); text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        @media (max-width: 640px) {
+            .hero { padding: 60px 20px 40px; }
+            .section { padding: 24px 20px; border-radius: 12px; }
+            .toc-inner { padding: 20px; }
+            .toc-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
 
+    <div class="hero">
+        <div class="hero-badge">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/></svg>
+            Legal Document
+        </div>
+        <h1>Terms of Use</h1>
+        <p class="subtitle">DogTalk (AI Dog Translator) by Aplexity Limited</p>
+        <p class="update-date">Version 1.0 / Effective Date: April 15, 2026</p>
+    </div>
+
+    <nav class="toc">
+        <div class="toc-inner">
+            <h2>Table of Contents</h2>
+            <div class="toc-grid">
+                <a href="#s1">Introduction</a>
+                <a href="#s2">Eligibility</a>
+                <a href="#s3">User Warranties</a>
+                <a href="#s4">Account</a>
+                <a href="#s5">Services Description</a>
+                <a href="#s6">AI-Generated Content</a>
+                <a href="#s7">Prohibited Activities</a>
+                <a href="#s8">Subscriptions</a>
+                <a href="#s9">Intellectual Property</a>
+                <a href="#s10">Your Content</a>
+                <a href="#s11">Disclaimer of Warranties</a>
+                <a href="#s12">Limitation of Liability</a>
+                <a href="#s13">Indemnification</a>
+                <a href="#s14">Arbitration & Disputes</a>
+                <a href="#s15">Governing Law</a>
+                <a href="#s16">Apple App Store Terms</a>
+                <a href="#s17">Service Availability</a>
+                <a href="#s18">Termination</a>
+                <a href="#s19">Electronic Communications</a>
+                <a href="#s20">Export Compliance</a>
+                <a href="#s21">General Provisions</a>
+                <a href="#s22">Changes</a>
+                <a href="#s23">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div class="section" id="s1">
+            <h2><span class="num">1</span> Introduction</h2>
+            <p>These Terms of Use ("Terms") govern your access to and use of the DogTalk mobile application (also referred to as "AI Dog Translator"; the name of the application may change). The term "App" refers to the application under any name, and the term "Website" refers to our website at aplexityai.com. Together, the App and Website are the "Services," provided by Aplexity Limited ("Company," "we," "us," or "our"), a company registered in Hong Kong.</p>
+            <p>These Terms incorporate our <a href="https://aplexityai.com/aidog/privacy_policy.html">Privacy Policy</a> by reference. Together, these documents form the entire agreement between you and the Company regarding the Services.</p>
+            <p>By downloading, accessing, or using the Services, you agree to these Terms. If you do not agree, do not use the Services.</p>
+        </div>
+
+        <div class="section" id="s2">
+            <h2><span class="num">2</span> Eligibility</h2>
+            <ul>
+                <li>You must be at least <strong>18 years old</strong> to use the Services independently.</li>
+                <li>Users aged <strong>13 to 17</strong> may use the Services only with verifiable parental or legal guardian consent and under their supervision. The parent or guardian agrees to be bound by these Terms on behalf of the minor and is responsible for the minor's use of the Services.</li>
+                <li>Users under the age of <strong>13</strong> are not permitted to use the Services.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="s3">
+            <h2><span class="num">3</span> User Warranties</h2>
+            <p>By using the Services, you represent and warrant that:</p>
+            <ul>
+                <li>All information you provide is accurate, current, and complete.</li>
+                <li>You have the legal capacity to enter into these Terms.</li>
+                <li>You will not use automated systems, bots, or scripts to access or interact with the Services.</li>
+                <li>You will comply with all applicable local, national, and international laws and regulations.</li>
+                <li>You will not attempt to gain unauthorized access to any part of the Services, other accounts, or connected systems.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="s4">
+            <h2><span class="num">4</span> Account</h2>
+            <p>Certain features require an account created with your email address. You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account. Notify us immediately of any unauthorized use of your account.</p>
+            <p>You may delete your account at any time through the App settings. Upon deletion, we will remove your personal data in accordance with our <a href="https://aplexityai.com/aidog/privacy_policy.html">Privacy Policy</a>.</p>
+        </div>
+
+        <div class="section" id="s5">
+            <h2><span class="num">5</span> Services Description</h2>
+            <p>DogTalk is a utility app that helps dog owners better understand and care for their pets. The App stores all your personal content (profiles, health records, care logs) locally on your device. The AI analysis feature is powered by Google Gemini API.</p>
+            <ul>
+                <li><strong>Dog Behavior Analysis:</strong> Ethology-based analysis of dog body language and behavior from photos, powered by Google Gemini AI. The analysis draws on principles of ethology (the scientific study of animal behavior) to interpret posture, facial expressions, and body signals.</li>
+                <li><strong>Dog Profiles:</strong> Create and manage profiles for your dogs locally on your device, including breed information, health records, vaccination history, and veterinary documents.</li>
+                <li><strong>Care Tracking & Reminders:</strong> Log your dog's water intake, food, activities, and daily wellness. Set customizable reminders for feeding, hydration, and activities. Reminders are a convenience tool designed to help you stay on top of your dog's routine. They are not medical alerts and do not monitor your dog's actual condition.</li>
+                <li><strong>Tips & Lifehacks:</strong> Curated dog care tips, training advice, and personalized recommendations.</li>
+                <li><strong>Training Achievements:</strong> Track training milestones through gamified achievement cards.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="s6">
+            <h2><span class="num">6</span> AI-Generated Content and Limitations</h2>
+            <p>The App uses Google Gemini AI to analyze dog behavior based on ethological principles. This section describes the capabilities and limitations of this feature.</p>
+
+            <h3>6.1 Informational Purpose Only</h3>
+            <ul>
+                <li>AI-generated analysis and recommendations are for <strong>informational and educational purposes only</strong>. They are designed to help you learn about canine body language and behavior patterns.</li>
+                <li>The analysis is <strong>not a veterinary diagnosis</strong>, not a health assessment, and not a substitute for professional veterinary care.</li>
+                <li>You shall not represent AI-generated content as professional veterinary advice or as human-created expert analysis.</li>
+            </ul>
+
+            <h3>6.2 No Medical or Emergency Reliance</h3>
+            <ul>
+                <li><strong>The App cannot detect medical conditions, pain, illness, or emergencies.</strong> If your dog shows signs of distress, injury, illness, or unusual behavior, contact a veterinarian immediately regardless of what the App displays.</li>
+                <li>AI may misinterpret, underestimate, or fail to identify signs that a trained veterinarian or behaviorist would recognize. This is an inherent limitation of image-based AI analysis.</li>
+                <li>The Company is not responsible for any harm, injury, or loss resulting from reliance on AI-generated analysis, delayed veterinary care, or failure to seek professional advice.</li>
+            </ul>
+
+            <h3>6.3 Accuracy Limitations</h3>
+            <ul>
+                <li>AI outputs may contain inaccuracies, errors, or incomplete interpretations. Results depend on photo quality, angle, lighting, and visible body language signals.</li>
+                <li>Ethological interpretation of behavior is context-dependent. The AI does not have access to your dog's history, environment, or full behavioral context.</li>
+                <li>The same behavior may have different meanings in different contexts. The App provides general guidance, not definitive conclusions.</li>
+            </ul>
+
+            <h3>6.4 Reminders and Care Tools</h3>
+            <ul>
+                <li>Reminders (water, feeding, activity) are convenience tools that help you maintain a care routine. They are based on schedules you set and do not monitor your dog's actual needs or condition.</li>
+                <li>Reminders do not replace your judgment as a pet owner. Your dog's actual needs may differ from any schedule or recommendation the App provides.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="s7">
+            <h2><span class="num">7</span> Prohibited Activities</h2>
+            <p>You agree not to use the Services to:</p>
+            <ul>
+                <li>Upload, transmit, or share content that is illegal, harmful, threatening, abusive, harassing, defamatory, or otherwise objectionable.</li>
+                <li>Upload content that promotes animal cruelty, abuse, or neglect.</li>
+                <li>Upload content depicting violence, hate speech, or discrimination based on race, gender, religion, nationality, disability, sexual orientation, or age.</li>
+                <li>Upload sexually explicit, pornographic, or obscene material.</li>
+                <li>Impersonate any person or entity, or misrepresent your affiliation with any person or entity.</li>
+                <li>Distribute malware, viruses, or any other harmful software.</li>
+                <li>Reverse engineer, decompile, or disassemble any part of the Services.</li>
+                <li>Interfere with or disrupt the Services, servers, or connected networks.</li>
+                <li>Use the Services for any commercial purpose not expressly permitted by us.</li>
+                <li>Collect or harvest user data without authorization.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="s8">
+            <h2><span class="num">8</span> In-App Purchases and Subscriptions</h2>
+
+            <h3>8.1 Subscription Plans</h3>
+            <p>The App offers free core features along with optional premium ("Pro") subscription plans on a weekly, monthly, or yearly basis. Pro features include unlimited behavior scans, premium care features, and additional dog profile capabilities.</p>
+
+            <h3>8.2 Free Trial and Auto-Renewal</h3>
+            <p>We may offer free trial periods for Pro subscriptions. <strong>Important: if you do not cancel at least 24 hours before the trial period ends, your subscription will automatically convert to a paid subscription and your payment method will be charged.</strong> Subscriptions automatically renew at the end of each billing period unless you cancel at least 24 hours before the renewal date. You can manage and cancel your subscription at any time through your Apple ID account settings (Settings > Apple ID > Subscriptions).</p>
+            <p>By subscribing, you expressly consent to the automatic renewal terms described above. After subscribing, you will receive a confirmation that includes the renewal terms, the cancellation policy, and instructions for cancellation.</p>
+
+            <h3>8.3 Payment</h3>
+            <p>All payments are processed through Apple's App Store. By subscribing, you agree to pay the applicable subscription fees. Prices may vary by region and are subject to change. Price changes take effect at the start of the next billing cycle following notice.</p>
+
+            <h3>8.4 Refunds</h3>
+            <p>Refunds are handled in accordance with Apple's App Store refund policies. We do not directly process refunds for purchases made through the App Store. For EU/EEA users: your statutory right of withdrawal under the Consumer Rights Directive may apply. For all users: any additional refund rights provided by applicable law in your jurisdiction are preserved.</p>
+
+            <h3>8.5 Additional Charges</h3>
+            <p>We are not responsible for any charges from your mobile carrier or internet service provider related to your use of the Services.</p>
+        </div>
+
+        <div class="section" id="s9">
+            <h2><span class="num">9</span> Intellectual Property</h2>
+
+            <h3>9.1 Company Rights</h3>
+            <p>The Services, including all content, features, functionality, design, text, graphics, logos, icons, and software, are owned by Aplexity Limited and are protected by copyright, trademark, trade secret, and other intellectual property laws. All rights not expressly granted in these Terms are reserved.</p>
+
+            <h3>9.2 User Feedback</h3>
+            <p>Any feedback, suggestions, ideas, or recommendations you provide about the Services ("Feedback") is non-confidential and becomes the sole and exclusive property of the Company. You assign to us all rights, title, and interest in such Feedback without any obligation of compensation.</p>
+        </div>
+
+        <div class="section" id="s10">
+            <h2><span class="num">10</span> Your Content</h2>
+            <p>Your content (dog profiles, health records, photos, care data) is stored locally on your device. We do not host or store your content on our servers. You retain full ownership and control over it.</p>
+            <p>When you submit a photo for AI analysis, you grant us a limited, non-exclusive license to transmit that photo to Google Gemini API solely for the purpose of generating the analysis result. This license expires once the analysis is returned to your device.</p>
+            <p>We reserve the right to refuse processing of any content that violates these Terms.</p>
+        </div>
+
+        <div class="section" id="s11">
+            <h2><span class="num">11</span> Disclaimer of Warranties</h2>
+            <p class="caps">The Services are provided "as is" and "as available" without warranties of any kind, whether express, implied, or statutory. We disclaim all warranties, including implied warranties of merchantability, fitness for a particular purpose, and non-infringement.</p>
+            <p>We do not warrant that:</p>
+            <ul>
+                <li>The Services will be uninterrupted, timely, secure, or error-free.</li>
+                <li>AI-generated behavior analysis will be accurate, reliable, complete, or suitable for any particular purpose.</li>
+                <li>The AI will detect or correctly interpret signs of illness, pain, distress, or medical conditions in your dog.</li>
+                <li>Care reminders will be appropriate for your specific dog's needs, health status, or circumstances.</li>
+                <li>Any defects in the Services will be corrected.</li>
+            </ul>
+            <p>The App is a utility tool, not a medical device or veterinary service. AI-based ethological analysis has inherent limitations and cannot replace direct observation by qualified professionals. You use the Services at your own risk and discretion.</p>
+        </div>
+
+        <div class="section" id="s12">
+            <h2><span class="num">12</span> Limitation of Liability</h2>
+            <p class="caps">To the maximum extent permitted by law, Aplexity Limited shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, use, or goodwill, arising out of or in connection with your use of the Services.</p>
+            <p>Our total aggregate liability for all claims arising out of or relating to these Terms or the Services shall not exceed the greater of: (a) the amount you paid to us in the 12 months preceding the claim, or (b) USD $100.</p>
+            <p>Nothing in these Terms limits liability for: (a) death or personal injury caused by negligence; (b) fraud or fraudulent misrepresentation; or (c) any liability that cannot be excluded or limited under applicable law. Some jurisdictions do not allow the exclusion or limitation of certain damages; in such jurisdictions, our liability is limited to the fullest extent permitted by law.</p>
+        </div>
+
+        <div class="section" id="s13">
+            <h2><span class="num">13</span> Indemnification</h2>
+            <p>To the maximum extent permitted by applicable law, you agree to defend, indemnify, and hold harmless Aplexity Limited, its officers, directors, employees, and agents from any claims, damages, losses, liabilities, costs, and expenses (including reasonable attorney fees) arising from:</p>
+            <ul>
+                <li>Your use of the Services.</li>
+                <li>Your content uploaded to the Services.</li>
+                <li>Your violation of these Terms.</li>
+                <li>Your violation of any third-party rights, including intellectual property rights.</li>
+                <li>Any decisions or actions taken based on AI-generated analysis or recommendations.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="s14">
+            <h2><span class="num">14</span> Dispute Resolution and Arbitration</h2>
+
+            <h3>14.1 Informal Resolution</h3>
+            <p>Before filing a formal claim, you and the Company agree to attempt to resolve any dispute informally. Contact us at <a href="mailto:support@aplexityai.com">support@aplexityai.com</a> with a description of the dispute. We will attempt to resolve it within 30 days.</p>
+
+            <h3>14.2 Binding Arbitration (United States Users)</h3>
+            <p>If you reside in the United States, any dispute, claim, or controversy arising out of or relating to these Terms or the Services that is not resolved informally within 30 days shall be resolved by binding individual arbitration, and not in court. The Federal Arbitration Act (9 U.S.C. sections 1-16) governs the interpretation and enforcement of this section. Arbitration shall be administered by any nationally recognized arbitration provider agreed upon by the parties, or if the parties cannot agree, by the American Arbitration Association ("AAA") under its Consumer Arbitration Rules.</p>
+            <ul>
+                <li>Arbitration may be conducted by telephone, video, based on written submissions, or in person in the county where you reside or another mutually agreed location.</li>
+                <li>The arbitrator's award is binding and may be entered as a judgment in any court of competent jurisdiction.</li>
+            </ul>
+
+            <h3>14.3 Arbitration Fees</h3>
+            <p>Each party pays its own arbitration fees as set by the arbitration provider's rules. If the arbitration provider's consumer rules require the Company to pay a greater share, we will do so. If a court or arbitrator determines that bringing a claim is cost-prohibitive for you compared to litigation, we will pay your share of filing and arbitrator fees.</p>
+
+            <h3>14.4 Mass Arbitration</h3>
+            <p>If 25 or more similar claims are filed against the Company within a 60-day period, the following applies: (a) claims shall be grouped into batches of no more than 25; (b) one claim from each batch shall be selected as a bellwether and arbitrated first; (c) the bellwether outcome shall inform (but not bind) settlement negotiations for the remaining claims in that batch; (d) subsequent batches proceed only after the prior batch is resolved or settled. This process balances individual rights with practical administration.</p>
+
+            <h3>14.5 Class Action and Jury Trial Waiver</h3>
+            <p><strong>You and the Company each waive the right to a jury trial. You and the Company each waive the right to participate in class actions, class arbitrations, representative actions, or consolidated proceedings.</strong> All claims must be brought in the parties' individual capacity, not as a plaintiff or class member in any purported class or representative proceeding.</p>
+
+            <h3>14.6 Opt-Out</h3>
+            <p>You may opt out of the arbitration and class action waiver provisions by sending written notice to <a href="mailto:support@aplexityai.com">support@aplexityai.com</a> within 30 days of first accepting these Terms. The notice must include your name, email address, and a clear statement that you wish to opt out. If you opt out, Section 14.7 applies.</p>
+
+            <h3>14.7 Non-U.S. Users, Small Claims, and Opt-Out Disputes</h3>
+            <p>For users outside the United States, or for disputes excluded from arbitration: disputes shall be submitted to the exclusive jurisdiction of the courts of the Hong Kong Special Administrative Region. Either party may bring an individual claim in a small claims court of competent jurisdiction as an alternative to arbitration, provided the claim falls within that court's jurisdictional limits.</p>
+        </div>
+
+        <div class="section" id="s15">
+            <h2><span class="num">15</span> Governing Law</h2>
+            <p>These Terms are governed by the laws of the Hong Kong Special Administrative Region, without regard to conflict of law provisions. For users residing in the United States: to the extent that mandatory consumer protection laws of your state of residence provide greater protections than Hong Kong law, those mandatory protections apply. For users residing in the EU/EEA: nothing in these Terms deprives you of the protection of mandatory provisions of the law of your country of residence.</p>
+        </div>
+
+        <div class="section" id="s16">
+            <h2><span class="num">16</span> Apple App Store Terms</h2>
+            <p>The following terms apply to the extent the App is accessed through or downloaded from the Apple App Store:</p>
+            <ul>
+                <li>These Terms are between you and Aplexity Limited only, not Apple Inc. ("Apple"). Aplexity Limited, not Apple, is solely responsible for the App and its content.</li>
+                <li>The license granted to you is limited to a non-transferable license to use the App on any Apple-branded product that you own or control, as permitted by the Usage Rules set forth in the Apple Media Services Terms of Service.</li>
+                <li>Aplexity Limited, not Apple, is responsible for any maintenance and support for the App. Apple has no obligation to furnish any maintenance or support services for the App.</li>
+                <li>Aplexity Limited, not Apple, is responsible for any product warranties. If the App fails to conform to any applicable warranty, you may notify Apple, and Apple will refund the purchase price (if any) for the App. To the maximum extent permitted by law, Apple has no other warranty obligation with respect to the App.</li>
+                <li>Aplexity Limited, not Apple, is responsible for addressing any claims relating to the App, including product liability claims, claims that the App fails to conform to any applicable legal or regulatory requirement, and consumer protection claims.</li>
+                <li>In the event of any third-party claim that the App infringes a third party's intellectual property rights, Aplexity Limited, not Apple, is solely responsible for the investigation, defense, settlement, and discharge of such claim.</li>
+                <li><strong>Apple and its subsidiaries are third-party beneficiaries of these Terms.</strong> Upon your acceptance of these Terms, Apple has the right (and is deemed to have accepted the right) to enforce these Terms against you as a third-party beneficiary.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="s17">
+            <h2><span class="num">17</span> Service Availability</h2>
+            <p>We aim to provide the Services on a continuous basis but do not guarantee uninterrupted availability. We reserve the right to suspend, modify, or discontinue the Services (or any part) at any time, with or without notice, for maintenance, updates, or any other reason. We are not liable for any loss or inconvenience caused by such interruptions.</p>
+        </div>
+
+        <div class="section" id="s18">
+            <h2><span class="num">18</span> Termination</h2>
+            <p>We reserve the right to suspend or terminate your access to the Services at any time, without prior notice, for any reason, including:</p>
+            <ul>
+                <li>Violation of these Terms.</li>
+                <li>Violation of applicable laws or regulations.</li>
+                <li>Conduct that is harmful to other users, the Company, or third parties.</li>
+                <li>Abuse of the Services or activities that compromise service integrity.</li>
+            </ul>
+            <p>Upon termination, your right to use the Services ceases immediately. Sections that by their nature should survive termination (including Intellectual Property, Disclaimer of Warranties, Limitation of Liability, Indemnification, and Arbitration) shall continue in effect.</p>
+        </div>
+
+        <div class="section" id="s19">
+            <h2><span class="num">19</span> Electronic Communications</h2>
+            <p>By using the Services, you consent to receive communications from us electronically (via email, push notifications, or in-App messages). You agree that all agreements, notices, disclosures, and other communications we provide electronically satisfy any legal requirement that such communications be in writing, in accordance with the U.S. Electronic Signatures in Global and National Commerce Act (E-SIGN Act) and applicable laws.</p>
+        </div>
+
+        <div class="section" id="s20">
+            <h2><span class="num">20</span> Export Compliance</h2>
+            <p>You represent that: (a) you are not located in a country subject to a U.S. Government embargo or designated as a "terrorist supporting" country; and (b) you are not listed on any U.S. Government list of prohibited or restricted parties. You agree not to use or export the App except as authorized by United States law and the laws of the jurisdiction in which the App was obtained.</p>
+        </div>
+
+        <div class="section" id="s21">
+            <h2><span class="num">21</span> General Provisions</h2>
+
+            <h3>21.1 Entire Agreement</h3>
+            <p>These Terms, together with the Privacy Policy, constitute the entire agreement between you and Aplexity Limited regarding the Services and supersede all prior or contemporaneous agreements, understandings, or representations.</p>
+
+            <h3>21.2 Severability</h3>
+            <p>If any provision of these Terms is found invalid, illegal, or unenforceable, that provision shall be modified to the minimum extent necessary to make it valid, or severed if modification is not possible. The remaining provisions continue in full force.</p>
+
+            <h3>21.3 Waiver</h3>
+            <p>Failure by the Company to enforce any provision of these Terms does not constitute a waiver of that provision or any other provision. No waiver is effective unless made in writing and signed by the Company.</p>
+
+            <h3>21.4 Assignment</h3>
+            <p>The Company may assign or transfer these Terms (or any rights or obligations under them) in connection with a merger, acquisition, reorganization, or sale of assets, or by operation of law, without restriction. You may not assign your rights or obligations under these Terms without our prior written consent.</p>
+
+            <h3>21.5 Force Majeure</h3>
+            <p>The Company is not liable for any failure or delay in performing obligations caused by events beyond our reasonable control, including natural disasters, pandemics, government actions, wars, civil unrest, power outages, internet or telecommunications failures, or third-party service disruptions.</p>
+        </div>
+
+        <div class="section" id="s22">
+            <h2><span class="num">22</span> Changes to These Terms</h2>
+            <p>We may update these Terms from time to time. For material changes, we will provide at least 30 days' notice by posting the updated Terms within the App and, where possible, by email. If you do not agree with the changes, you may stop using the Services and delete your account before the changes take effect. Continued use of the Services after the notice period constitutes acceptance of the updated Terms.</p>
+        </div>
+
+        <div class="section" id="s23">
+            <h2><span class="num">23</span> Contact Us</h2>
+            <p>For questions or concerns about these Terms:</p>
+            <ul>
+                <li><strong>Email:</strong> <a href="mailto:support@aplexityai.com">support@aplexityai.com</a></li>
+                <li><strong>Address:</strong> Aplexity Limited, Unit 603A, 6/F, Tower 1, Admiralty Centre, Harcourt Road, Hong Kong</li>
+                <li><strong>Website:</strong> <a href="https://aplexityai.com" target="_blank">aplexityai.com</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p><span class="brand">DogTalk</span> / Aplexity Limited &copy; 2026</p>
+        <p style="margin-top: 6px;"><a href="https://aplexityai.com/aidog/privacy_policy.html">Privacy Policy</a></p>
+    </footer>
+
+</body>
+</html>
