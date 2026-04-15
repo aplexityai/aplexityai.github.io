@@ -1,1 +1,283 @@
-ввв
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatCom - Privacy Policy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #F97316;
+            --primary-dark: #EA580C;
+            --accent: #FB923C;
+            --bg-dark: #0F172A;
+            --bg-card: #1E293B;
+            --text-primary: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --border: rgba(255,255,255,0.06);
+            --glow: rgba(249,115,22,0.15);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7; color: var(--text-primary);
+            background-color: var(--bg-dark); min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+        body::before {
+            content: ''; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(ellipse at 20% 20%, rgba(249,115,22,0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 80%, rgba(59,130,246,0.05) 0%, transparent 50%);
+            z-index: -1; animation: ambientShift 20s ease-in-out infinite alternate;
+        }
+        @keyframes ambientShift { 0% { transform: translate(0,0); } 100% { transform: translate(-5%,-3%); } }
+        .hero { padding: 80px 24px 60px; text-align: center; position: relative; }
+        .hero::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 120px; height: 2px; background: linear-gradient(90deg, transparent, var(--primary), transparent); }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.2); border-radius: 100px; font-size: 0.8rem; font-weight: 500; color: var(--accent); margin-bottom: 24px; letter-spacing: 0.5px; text-transform: uppercase; }
+        .hero-badge svg { width: 14px; height: 14px; fill: currentColor; }
+        .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero .subtitle { font-size: 1rem; color: var(--text-secondary); }
+        .hero .update-date { font-size: 0.85rem; color: var(--text-muted); margin-top: 8px; }
+        .toc { max-width: 780px; margin: 0 auto 40px; padding: 0 24px; }
+        .toc-inner { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; }
+        .toc h2 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 16px; font-weight: 600; }
+        .toc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px; }
+        .toc a { display: block; padding: 8px 12px; color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; border-radius: 8px; transition: all 0.2s ease; }
+        .toc a:hover { color: var(--accent); background: rgba(249,115,22,0.05); }
+        .container { max-width: 780px; margin: 0 auto; padding: 0 24px 80px; }
+        .section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 36px 40px; margin-bottom: 20px; transition: border-color 0.3s ease; }
+        .section:hover { border-color: rgba(255,255,255,0.1); }
+        .section h2 { font-size: 1.35rem; font-weight: 600; color: var(--text-primary); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+        .section h2 .num { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; min-width: 32px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 10px; font-size: 0.8rem; font-weight: 700; color: #fff; }
+        .section h3 { font-size: 1.05rem; font-weight: 600; color: var(--text-primary); margin-top: 24px; margin-bottom: 12px; }
+        .section p { color: var(--text-secondary); margin-bottom: 16px; font-size: 0.95rem; line-height: 1.75; }
+        .section ul { list-style: none; padding: 0; margin-bottom: 16px; }
+        .section ul li { position: relative; padding: 10px 0 10px 28px; color: var(--text-secondary); font-size: 0.95rem; border-bottom: 1px solid var(--border); }
+        .section ul li:last-child { border-bottom: none; }
+        .section ul li::before { content: ''; position: absolute; left: 0; top: 18px; width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent)); box-shadow: 0 0 8px var(--glow); }
+        .section ul li strong { color: var(--text-primary); font-weight: 600; }
+        .section a { color: var(--accent); text-decoration: none; font-weight: 500; transition: color 0.2s ease; }
+        .section a:hover { color: #FDBA74; text-decoration: underline; }
+        .footer { text-align: center; padding: 40px 24px 60px; color: var(--text-muted); font-size: 0.85rem; }
+        .footer .brand { font-weight: 600; color: var(--text-secondary); }
+        .footer a { color: var(--accent); text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        @media (max-width: 640px) { .hero { padding: 60px 20px 40px; } .section { padding: 24px 20px; border-radius: 12px; } .toc-inner { padding: 20px; } .toc-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <div class="hero-badge">
+            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+            Legal Document
+        </div>
+        <h1>Privacy Policy</h1>
+        <p class="subtitle">ChatCom by Aplexity Limited</p>
+        <p class="update-date">Last updated: April 15, 2026</p>
+    </div>
+
+    <nav class="toc">
+        <div class="toc-inner">
+            <h2>Table of Contents</h2>
+            <div class="toc-grid">
+                <a href="#s1">Introduction</a>
+                <a href="#s2">Personal Data Definition</a>
+                <a href="#s3">Data Processing Principles</a>
+                <a href="#s4">Types of Data Collected</a>
+                <a href="#s5">Automatic Collection</a>
+                <a href="#s6">Third-Party Sources</a>
+                <a href="#s7">Collection Purposes</a>
+                <a href="#s8">Transfer & Disclosure</a>
+                <a href="#s9">Legal Proceedings</a>
+                <a href="#s10">Your Rights</a>
+                <a href="#s11">Cookies</a>
+                <a href="#s12">Cross-Border Consent</a>
+                <a href="#s13">Security Breach Notice</a>
+                <a href="#s14">Data Retention</a>
+                <a href="#s15">Children's Privacy</a>
+                <a href="#s16">Liability</a>
+                <a href="#s17">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div class="section" id="s1">
+            <h2><span class="num">1</span> Introduction</h2>
+            <p>Aplexity Limited ("we", "us", or the "Company") respects your privacy and protects it through the introduction and implementation of this document ("Privacy Policy" or "Policy").</p>
+            <p>We process the personal data ("Personal Data") of users in accordance with general principles of privacy and the provisions of the applicable data protection legislation, particularly the Hong Kong Personal Data (Privacy) Ordinance (Cap. 486) ("PDPO") and the EU General Data Protection Regulation (Regulation (EU) 2016/679) ("GDPR"), recommendations provided by the Model AI Personal Data Protection Framework adopted by the Hong Kong Office of the Privacy Commissioner for Personal Data and other applicable legislation ("Applicable Legislation").</p>
+            <p>This policy governs how we handle the personal data of our users via using our mobile application ChatCom ("App") that is developed, owned, maintained, used and being sold by the Company, as well as via accessing the Company's website aplexityai.com ("Website"). For the purposes of this Privacy Policy, both the App and the Website shall be referred below as "App".</p>
+            <p>Please review and express consent to this Data Privacy Policy so that you acknowledge and understand the purposes for which we collect, use, store, share, transmit, delete or otherwise process (collectively, "process") your Personal Data.</p>
+            <p>The terms of the Privacy Policy form an integral part of the <a href="https://aplexityai.com/chatcom/terms-of-use">Terms of Use</a>. The Company may from time to time change the Privacy Policy and Terms of Use, jointly or severally, to reflect technological, business, legal or regulatory changes. Updates regarding the Privacy Policy will be published in this document. Use of the App is subject to its current Privacy Policy and will indicate your consent to the Privacy Policy as well as changes to it.</p>
+            <p>Your continued use of the App after we make such updates, modifications, and changes is deemed to be acceptance of such, so please check the Policy periodically for updates.</p>
+        </div>
+
+        <div class="section" id="s2">
+            <h2><span class="num">2</span> Personal Data Definition</h2>
+            <p>Personal Data means any information relating to you directly or indirectly, from which it is practicable for your identity to be directly or indirectly ascertained, or such wider definition as may be prescribed in the Personal Data (Privacy) Ordinance (Cap. 486) and other Applicable Legislation.</p>
+        </div>
+
+        <div class="section" id="s3">
+            <h2><span class="num">3</span> Data Processing Principles</h2>
+            <p>Your personal data, which you provided/will provide to our Company and/or obtained by our Company by any external means, may be processed by our Company as "Data User":</p>
+            <ul>
+                <li>In the context of the objective of processing your personal data and in connection with this purpose, in a limited and measured manner.</li>
+                <li>By maintaining the accuracy and up-to-date version of the personal data as reported or notified to our Company.</li>
+                <li>May be recorded, stored, preserved, reorganized and be transferred to the organizations authorized to request such personal data by law and shall be transferred, classified and shared with third parties within the country or abroad under the conditions stipulated by legislation and upon your explicit consent if necessary, and they may be processed by other means listed under the legislation and be subject to other procedures set forth in the applicable legislation.</li>
+            </ul>
+            <p>This Privacy Policy is adopted for the continuance and improvement of the activities carried out by us in line with the principles set forth in the Hong Kong PDPO, GDPR and other applicable legislation.</p>
+        </div>
+
+        <div class="section" id="s4">
+            <h2><span class="num">4</span> Types of Personal Data Collected</h2>
+            <p>We collect the following types of Personal Data:</p>
+            <ul>
+                <li><strong>Contact Information:</strong> Basic contact details, such as name, address, phone number, and email. We use this information where necessary to perform our contract obligations with you regarding your use of the App, and to communicate with you.</li>
+                <li><strong>Account Information:</strong> Such as name, username, e-mail and password. We use this information where necessary to perform our contract with you to provide the Services and to maintain and secure your account. If you choose to register an account, you are responsible for keeping your account credentials safe. We recommend you do not share your access details with anyone else. If you believe your account has been compromised, please contact us immediately via e-mail below.</li>
+                <li><strong>Payment Information:</strong> Such as credit or debit card information and billing address, which we collect using a third party payment processor. We use this information where necessary to perform our contract with you to process your payment and provide you with access to the App.</li>
+                <li><strong>User Input and Output:</strong> Such as questions, prompts and other content that you input, upload or submit in the App, and the output that you create, and any collections or pages that you generate using the App. This content may constitute or contain personal information, depending on the substance and how it is associated with your account. We use this information where necessary to perform our contract with you to generate and output new content as part of the Services.</li>
+                <li><strong>Other Information You Provide:</strong> Any other information you choose to include in communications with us when necessary to perform our contract with you.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="s5">
+            <h2><span class="num">5</span> Information Collected Automatically</h2>
+            <p>We and certain third parties also automatically collect certain information about your interaction with the App ("Usage Data") through the use of cookies, pixels, tags and other tracking technologies ("Tracking Technologies"). Usage Data includes:</p>
+            <ul>
+                <li><strong>Device Information:</strong> Device type, operating system, unique device identifier, and internet protocol (IP) address.</li>
+                <li><strong>Location Information:</strong> Approximate location.</li>
+                <li><strong>Interaction Data:</strong> Browser type, log data, date and time stamps, clickstream data, interactions with marketing emails, and ad impressions.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="s6">
+            <h2><span class="num">6</span> Information Collected From Other Sources</h2>
+            <p>We may obtain information about you from outside sources, including information that we collect directly from third parties and information from third parties that you choose to share with us:</p>
+            <ul>
+                <li><strong>Analytics Information:</strong> Analytics data we receive from analytics providers such as Google Analytics, which we use in our legitimate interests to understand your interaction with, and improve, our App.</li>
+                <li><strong>Partner Information:</strong> Information we receive from business partners and other companies that we partner with to provide you with free or discounted access to the App or other offers or promotions.</li>
+                <li><strong>Third Party Platform Information:</strong> Information we receive when you choose to link any third-party platforms to your account, such as when you sign into your account through Google or Apple. This may include your name, profile picture and email address.</li>
+                <li><strong>Public Information:</strong> Information from publicly accessible sources, such as information that is publicly available online, which we use where necessary to perform our contract obligations with you.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="s7">
+            <h2><span class="num">7</span> Purpose of Collecting Personal Data</h2>
+            <p>We will collect your Personal Data:</p>
+            <ul>
+                <li>When you provide such data to us directly via accessing the App, downloading the App, or contacting us via e-mail.</li>
+                <li>Via electronic or physical platforms, your mobile device, third party applications or third party sources which you can access the App via app stores such as Apple App Store, Google Play App Store.</li>
+                <li>When you submit such data to us via accessing the App (for example, by completing and submitting any forms).</li>
+                <li>From publicly available sources of information.</li>
+                <li>When you navigate through the App.</li>
+                <li>When we are required to do so by law or regulation.</li>
+            </ul>
+            <p>Additionally, we may use your Personal Data:</p>
+            <ul>
+                <li>To process your account in our App or renewal.</li>
+                <li>To make your Personal Data available to the third affiliated parties.</li>
+                <li>To collate data and prepare reports on our operations.</li>
+                <li>To process billing and payment, to determine amounts outstanding, and, if necessary, to collect outstanding payments.</li>
+                <li>To communicate with you regarding your use of the Application and assist with your queries.</li>
+                <li>To make such disclosures as required by applicable laws or regulations.</li>
+            </ul>
+            <p>While the supply of your Personal Data is voluntary, if you choose not to provide your Personal Data to us, we may not be able to provide you with the information or our services you require.</p>
+        </div>
+
+        <div class="section" id="s8">
+            <h2><span class="num">8</span> Transfer or Disclosure of Personal Data</h2>
+            <p>We will not transfer your Personal Data to any third parties, either affiliated or not affiliated to us, except the specific classes of data transferees listed below.</p>
+            <p>Personal Data collected and held by us will be kept confidential, but where disclosure is necessary for us to (a) comply with legal or regulatory obligations, or (b) provide services to you, or (c) carry out our business purposes, those Personal Data may be provided to the following parties, whether located within or in other jurisdictions outside Hong Kong, such as the member-states of the European Union:</p>
+            <ul>
+                <li><strong>Data Protection Officer:</strong> Responsible for ensuring compliance with all Applicable Legislation and with this Policy; for administering and overseeing implementation of this Policy.</li>
+                <li><strong>Affiliates:</strong> In accordance with our contract with you, for internal administration or support purposes, in our legitimate interest to run a successful business and to provide you with access to the App.</li>
+                <li><strong>Service Providers:</strong> Who provide us with the services allowing you to use the App, including for system administration, cloud storage, generative AI and content creation, security, customer transaction facilitation, marketing communications, web analytics, payment networks, and payment processing.</li>
+                <li><strong>Business Partners:</strong> Through whom you receive access to our App, including via use of a promotion code or other method provided by such business partners.</li>
+                <li><strong>Professional Advisors:</strong> Such as auditors, law firms, or accounting firms, as necessary.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="s9">
+            <h2><span class="num">9</span> Use of Personal Data in Legal Proceedings</h2>
+            <p>If it is required that we have to take action against you for any reason whatsoever including recovering from you any money you owe us, you expressly agree that the Personal Data provided by you can be relied upon in identifying and taking legal action against you.</p>
+        </div>
+
+        <div class="section" id="s10">
+            <h2><span class="num">10</span> Access, Corrections, Inquiries and Other Rights</h2>
+            <p>You have the right to request access to and the correction of your Personal Data held by us. When you request such access, we may take measures to verify your identity. If you wish to exercise such rights or if you have any inquiry in relation to this document, please contact us at: <a href="mailto:support@aplexityai.com">support@aplexityai.com</a></p>
+            <p>Where General Data Protection Regulation (GDPR) is applicable, data subjects have the following rights:</p>
+            <ul>
+                <li><strong>Right of Access:</strong> Learning whether Personal Data is being processed and, if so, accessing your personal data and the information regarding the processing.</li>
+                <li><strong>Right to Correction:</strong> To request the correction of information that you believe is inaccurate or the completion of information that you believe is incomplete.</li>
+                <li><strong>Right to Delete:</strong> To request deletion of Personal Data under the conditions stipulated in GDPR.</li>
+                <li><strong>Right to Restrict Processing:</strong> To request the restriction of the processing of Personal Data under the conditions stipulated in the GDPR.</li>
+                <li><strong>Right to Object to Processing:</strong> To object to the processing of Personal Data under the conditions stipulated in the GDPR.</li>
+                <li><strong>Right to Data Portability:</strong> To request the data collected by us to be transferred directly to another organization under certain conditions.</li>
+            </ul>
+            <p>Please note that in case of exercise of some of your rights, your access to the App and/or some of its parts or functions might be restricted and/or terminated.</p>
+        </div>
+
+        <div class="section" id="s11">
+            <h2><span class="num">11</span> Cookies and Other Technologies</h2>
+            <p>We may use Website "Cookies" for ongoing and standard operation, including to collect statistics about the use of the Website, to verify details, to adapt the Website to your personal preferences, for information security purposes and more.</p>
+            <p>Cookies are packets of information sent by our servers to your browser and then sent back by the browser each time it accesses our servers. The cookies may contain a variety of information, such as the web pages you have accessed, session durations and IP addresses. We may also use cookies to save you the need to re-enter your account details each time you log-in to the Service.</p>
+            <p>Some of the Cookies may expire when the session ends and you exit the App. Other cookies are saved on your hard drive. If you wish to block our cookies, you may do so by clicking the "options" button on your browser's menu and follow the necessary instructions. However, bear in mind that disabling cookies may complicate or even prevent the use of the Service, or certain features thereof.</p>
+            <p>If you are located in the European Economic Area (EEA), the United Kingdom (UK), or other regions where the GDPR or similar privacy laws apply, we process cookies and tracking technologies in accordance with applicable legal requirements. Where required, we will obtain your explicit consent before placing non-essential cookies on your device. You have the right to withdraw your consent at any time through our cookie management tool or by adjusting your browser settings.</p>
+        </div>
+
+        <div class="section" id="s12">
+            <h2><span class="num">12</span> Your Personal Consent to Cross-Border Transfer</h2>
+            <p>By acknowledging and accepting this Policy, you are granting us the following clear and expressed, voluntary, and informed consent to the following activities related to your Personal Data:</p>
+            <p>The personal information that we collect will be transferred to, stored at/processed in, or accessed from countries outside the jurisdiction in which you are based in, for the purposes described in this Privacy Policy, including countries in which our service providers or other third parties are located. Specifically, we have servers for the Service in the United States. We also have support, engineering and other teams who may support the Service from Hong Kong and the United States.</p>
+            <p>We process the personal information that you provide to us in countries outside the relevant jurisdiction you are resident in, in order to perform our contract with you (to provide you with access to our App). By using the App and acknowledging the Privacy Policy, you consent to the transfer of your personal information to third parties (if any), which may include the cross-border transfer of your information to any country or region where we have databases or affiliates and, in particular, to the jurisdictions specified herein.</p>
+        </div>
+
+        <div class="section" id="s13">
+            <h2><span class="num">13</span> Security Breach Notice</h2>
+            <p>We will safeguard your Personal Data and prevent any unauthorized access, disclosure, or use of your Personal Data. In case we or any Recipient is required to provide notice of unauthorized access to or other damage or invasion of the relevant security systems, you agree that the Company may do so when it is required or at our voluntary good faith discretion by posting notice on the Company's Website or sending such notice to any email address we have for you.</p>
+        </div>
+
+        <div class="section" id="s14">
+            <h2><span class="num">14</span> Data Retention</h2>
+            <p>We will keep your Personal Data for as long as necessary to fulfill the purpose for which the Personal Data was collected and for as long as we are obliged to retain such Personal Data by the requirements provided by the Applicable Legislation.</p>
+            <p>We will destroy any of your Personal Data that we no longer require as soon as it is practically feasible. We may also discard your Personal Data at our sole discretion, so you are advised to retain your own records and not rely upon our storage of any Personal Data, content, or other data.</p>
+            <p>Subject to the Applicable Legislation, you may have the right to inquire and request for a review of, request a copy of, make supplements or corrections to, discontinue collection, processing or use of, or request to delete some or all of your Personal Data at our possession. You may contact us if you have any inquiries with respect to what information we have.</p>
+        </div>
+
+        <div class="section" id="s15">
+            <h2><span class="num">15</span> Children's Privacy</h2>
+            <p>Children under the age of 13 are not permitted to use the Services, and we do not seek or knowingly collect any personal information about children, particularly those under 13 years of age or in the case of a region where the minimum age for processing personal information differs, such different age.</p>
+            <p>For users above the age of 13 but below the age where you are able to consent to the processing of your personal information, please obtain your parent or guardian's consent prior to using the Services.</p>
+            <p>If we become aware that we have unknowingly collected information about a child under 13 years of age or the relevant minimum age in your jurisdiction, we will make commercially reasonable efforts to delete such information. If you are the parent or guardian of a child under the relevant minimum age who has provided us with their personal information, you may contact us using the below information to request that it be deleted.</p>
+        </div>
+
+        <div class="section" id="s16">
+            <h2><span class="num">16</span> Liability</h2>
+            <p>The Company cannot be held liable or responsible for any loss of your Personal Data due to the technical problems occurred to our Company's hardware and/or software, due to unforeseeable operations of the malicious software or actions performed by malicious computer users. We will not be held responsible for any such loss or theft.</p>
+        </div>
+
+        <div class="section" id="s17">
+            <h2><span class="num">17</span> Contact Us</h2>
+            <p>For any Personal Data and privacy concern you can write to us:</p>
+            <ul>
+                <li><strong>Email:</strong> <a href="mailto:support@aplexityai.com">support@aplexityai.com</a></li>
+                <li><strong>Address:</strong> Aplexity Limited, Unit 603A, 6/F, Tower 1, Admiralty Centre, Harcourt Road, Hong Kong</li>
+                <li><strong>Website:</strong> <a href="https://aplexityai.com" target="_blank">aplexityai.com</a></li>
+            </ul>
+            <p>We aim to respond to inquiries within a reasonable timeframe. For legal or privacy-related requests, we may require you to verify your identity and provide specific information to process your request.</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p><span class="brand">ChatCom</span> / Aplexity Limited &copy; 2026</p>
+        <p style="margin-top: 6px;"><a href="https://aplexityai.com/chatcom/terms-of-use">Terms of Use</a></p>
+    </footer>
+
+</body>
+</html>
